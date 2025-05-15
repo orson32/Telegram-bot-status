@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  telegram-bot:
+    build: .
+    container_name: telegram-status-bot
+    environment:
+      - BOT_TOKEN=7647115155:AAG-WfGoGXtey6yDghDdiKlyv1WDxlQFUnY
+      - CHAT_ID=766950914
+    volumes:
+      - /usr/bin/vcgencmd:/usr/bin/vcgencmd:ro
+    devices:
+      - "/dev/vchiq:/dev/vchiq"
+    privileged: true
+    restart: unless-stopped
+    command: >
+      sh -c "python bot.py & while true; do python alert_bot.py; sleep 300; done"
