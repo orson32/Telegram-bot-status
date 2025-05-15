@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Docker
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.sock
+.env
+.env.*
+
+# Secrets o tokens que podrías guardar localmente
+credentials.json
+*.pem
+*.key
+
+# Editor / IDE stuff
+.vscode/
+.idea/
+*.swp
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
