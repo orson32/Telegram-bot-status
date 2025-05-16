@@ -27,17 +27,17 @@ def check_disk():
     return usage.percent
 
 def check_services():
+    output = subprocess.getoutput("ps aux")
+    targets = {
+        "dockerd": "Docker",
+        "nginx: master": "NGINX",
+        "glances -w": "Glances"
+    }
     failed = []
-    for svc in ["docker", "nginx", "glances"]:
-        try:
-            state = subprocess.check_output(["systemctl", "is-active", svc]).decode().strip()
-            if state != "active":
-                failed.append(svc)
-        except:
-            failed.append(svc)
+    for key, label in targets.items():
+        if key not in output:
+            failed.append(label)
     return failed
-
-# Lógica de alertas
 alerts = []
 
 if check_temp() > 70:

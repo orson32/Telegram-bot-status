@@ -55,15 +55,19 @@ def get_docker_containers():
         return f"❌ Docker error: {str(e)}"
 
 def get_services_status():
-    services = ["docker", "nginx", "glances"]
+    output = subprocess.getoutput("ps aux")
+    services = {
+        "dockerd": "Docker",
+        "nginx: master": "NGINX",
+        "glances -w": "Glances"
+    }
+
     status_list = []
-    for service in services:
-        try:
-            out = subprocess.check_output(["systemctl", "is-active", service]).decode().strip()
-            icon = "✅" if out == "active" else "❌"
-            status_list.append(f"{icon} {service}")
-        except:
-            status_list.append(f"❓ {service} (not found)")
+    for key, label in services.items():
+        if key in output:
+            status_list.append(f"✅ {label}")
+        else:
+            status_list.append(f"❌ {label}")
     return "\n".join(status_list)
 
 @bot.message_handler(commands=["status"])

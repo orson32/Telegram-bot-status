@@ -4,14 +4,15 @@ services:
   telegram-bot:
     build: .
     container_name: telegram-status-bot
-    environment:
-      - BOT_TOKEN=
-      - CHAT_ID=
+    pid: "host"
+    env_file:
+      - .env
     volumes:
       - /usr/bin/vcgencmd:/usr/bin/vcgencmd:ro
+      - /var/run/docker.sock:/var/run/docker.sock
     devices:
       - "/dev/vchiq:/dev/vchiq"
     privileged: true
-    restart: unless-stopped
     command: >
       sh -c "python bot.py & while true; do python alert_bot.py; sleep 300; done"
+    restart: unless-stopped
