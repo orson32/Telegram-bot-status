@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://github.com/orson32/telegram-bot-status/blob/main/A_2D_digital_graphic_design_image_displays_release.png?raw=true" alt="Bot Status Banner">
+</p>
+
+
 # Telegram Bot para Monitoreo de Raspberry Pi
 
 Este bot de Telegram te permite monitorear tu Raspberry Pi en tiempo real, desde cualquier lugar, y recibir alertas cuando algo va mal.
